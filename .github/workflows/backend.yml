@@ -30,7 +30,7 @@ jobs:
       run: |
         pytest
 
-    - name: Deploy SAM application
+        - name: Deploy SAM application
       run: |
         sam build
         sam deploy --no-confirm-changeset --region us-east-1 --stack-name 
