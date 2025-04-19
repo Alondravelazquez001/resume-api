@@ -11,34 +11,35 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      AWS_SAM_STACK_NAME: resume-stack
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: Run tests
-        run: |
-          pytest
+    - name: Run tests
+      run: |
+        pytest
+      env:
+        AWS_REGION: us-east-1
+        AWS_DEFAULT_REGION: us-east-1
 
-      - name: Deploy SAM application
-        run: |
-          sam build
-          sam deploy --no-confirm-changeset --region us-east-1 --stack-name resume-stack
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
+    - name: Deploy SAM application
+      run: |
+        sam build
+        sam deploy --no-confirm-changeset --region us-east-1 --stack-name resume-stack
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: us-east-1
 
 
