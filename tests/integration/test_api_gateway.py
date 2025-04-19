@@ -43,3 +43,7 @@ class TestApiGateway:
 
         assert response.status_code == 200
         assert response.json() == {"message": "hello world"}
+    def test_ci_cd_is_working():
+    assert True
+
+
