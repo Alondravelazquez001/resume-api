@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,7 +14,9 @@ jobs:
     env:
       AWS_DEFAULT_REGION: us-east-1
       AWS_REGION: us-east-1
-      AWS_SAM_STACK_NAME: ${{ vars.AWS_SAM_STACK_NAME }}
+      AWS_SAM_STACK_NAME: visitor-counter
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
       - name: Checkout code
